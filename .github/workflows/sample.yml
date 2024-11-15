@@ -65,6 +65,8 @@ jobs:
   unit-test:
     name: Unit test
     needs: static-analysis
+    permissions:
+      checks: write
     runs-on: self-hosted
 
     steps:
