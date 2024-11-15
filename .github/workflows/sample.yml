@@ -17,14 +17,14 @@ jobs:
       uses: actions/checkout@v4
       
     - name: Build with Maven
-      run: mvn package -DskipTests=true
+      run: mvn package "-DskipTests=true"
       
     - name: Archive build artifacts
       if: success()
       uses: actions/upload-artifact@v4
       with:
         name: build artifacts
-        path: target/*.jar
+        path: "target/*.jar"
 
   static-analysis:
     name: Static analysis
@@ -46,7 +46,7 @@ jobs:
       with:
         testConfig: "builtin://Recommended Rules"
         reportDir: "reports/sa"
-        installDir: "C:\parasoft\jtest_2024.1"
+        installDir: "C:/parasoft/jtest_2024.1"
         input: "target/jtest/jtest.data.json"
         
     - name: Upload results (SARIF)
