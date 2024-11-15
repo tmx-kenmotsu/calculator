@@ -11,44 +11,78 @@ jobs:
   build:
     name: Build    
     runs-on: self-hosted
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
+      
     - name: Build with Maven
       run: mvn package -DskipTests=true
-
+      
     - name: Archive build artifacts
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: Build artifacts
+        name: build artifacts
         path: target/*.jar
 
   static-analysis:
-    name: Jtest static analysis
+    name: static analysis
+    needs: build
     permissions:
       security-events: write
     runs-on: self-hosted
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      
     - name: Create input for Jtest
       run: mvn package jtest:jtest "-Djtest.skip=true"
+      
     - name: Run Jtest
       id: jtest
       uses: parasoft/run-jtest-action@2.0.0
       with:
+        testConfig: builtin://Recommended Rules
+        reportDir: reports/sa
         installDir: C:\parasoft\jtest_2024.1
         input: target/jtest/jtest.data.json
+        
     - name: Upload results (SARIF)
       if: always()
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: reports/report.sarif
+        sarif_file: reports/sa/report.sarif
+        
     - name: Archive reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: Static analysis reports
-        path: reports/*.*
+        name: static analysis reports
+        path: reports/sa/*.*
+
+  unit-test:
+    name: unit test
+    needs: static-analysis
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Run Jtest
+      run: mvn jtest:agent test jtest:jtest -Djtest.config="builtin://Unit Tests" -Djtest.report=reports/ut
+        
+    - name: Upload results (JUnit)
+      if: always()
+      uses: mikepenz/action-junit-report@v5
+      with:
+        report_paths: target/surefire-reports/TEST-*.xml
+        
+    - name: Archive reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: unit test reports
+        path: reports/ut/*.*
