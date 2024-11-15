@@ -38,7 +38,7 @@ jobs:
       uses: actions/checkout@v4
       
     - name: Create input for Jtest
-      run: mvn package jtest:jtest "-Djtest.skip=true"
+      run: mvn package jtest:jtest -DskipTests=true "-Djtest.skip=true"
       
     - name: Run Jtest
       id: jtest
