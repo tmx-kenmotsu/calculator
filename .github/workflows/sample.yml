@@ -42,4 +42,3 @@ jobs:
       with:
         name: Static analysis reports
         path: reports/*.*
-  sa
