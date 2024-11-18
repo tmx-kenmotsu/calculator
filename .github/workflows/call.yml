@@ -10,3 +10,4 @@ on:
 jobs:
   call-reusable-workflow:
     uses: tmx-kenmotsu/.github/.github/workflows/reusable-workflow.yml@main
+    secrets: inherit
