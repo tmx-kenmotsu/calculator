@@ -9,4 +9,4 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: tmx-kenmotsu/.github/blob/main/.github/workflows/reusable-workflow.yml@main
+    uses: tmx-kenmotsu/.github/workflows/reusable-workflow.yml@main
