@@ -1,0 +1,12 @@
+name: Call
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+  workflow_dispatch:
+
+jobs:
+  call-reusable-workflow:
+    uses: tmx-kenmotsu/.github/blob/main/.github/workflows/reusable-workflow.yml@main
