@@ -14,4 +14,4 @@ jobs:
       checks: write
     uses: tmx-kenmotsu/.github/.github/workflows/reusable-workflow.yml@main
     with:
-      build-cmd: m
+      build-cmd: mvn package -DskipTests=true
