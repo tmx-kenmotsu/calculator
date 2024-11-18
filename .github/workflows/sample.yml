@@ -24,7 +24,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: build artifacts
-        path: "target/*.jar"
+        path: target/*.jar
 
   static-analysis:
     name: Static analysis
@@ -44,23 +44,23 @@ jobs:
       id: jtest
       uses: parasoft/run-jtest-action@2.0.0
       with:
-        testConfig: "builtin://Recommended Rules"
-        reportDir: "reports/sa"
-        installDir: "C:/parasoft/jtest_2024.1"
-        input: "target/jtest/jtest.data.json"
+        testConfig: builtin://Recommended Rules
+        reportDir: reports/sa
+        installDir: C:/parasoft/jtest_2024.1
+        input: target/jtest/jtest.data.json
         
     - name: Upload results (SARIF)
       if: always()
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: "reports/sa/report.sarif"
+        sarif_file: reports/sa/report.sarif
         
     - name: Archive reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: static analysis reports
-        path: "reports/sa/*.*"
+        path: reports/sa/*.*
 
   unit-test:
     name: Unit test
@@ -80,11 +80,11 @@ jobs:
       if: always()
       uses: mikepenz/action-junit-report@v5
       with:
-        report_paths: "target/surefire-reports/TEST-*.xml"
+        report_paths: target/surefire-reports/TEST-*.xml
         
     - name: Archive reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: unit test reports
-        path: "reports/ut/*.*"
+        path: /ut/*.*
