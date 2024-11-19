@@ -1,6 +1,8 @@
 package examples.flowanalysis;
 
-public void createDir(File dir) {
-    if (dir != null || !dir.exists())
-        dir.mkdir();
+public class NullAlways {
+    public void createDir(File dir) {
+        if (dir != null || !dir.exists())
+            dir.mkdir();
+    }
 }
