@@ -15,3 +15,4 @@ jobs:
     uses: tmx-kenmotsu/.github/.github/workflows/reusable-workflow.yml@main
     with:
       build-cmd: mvn package -DskipTests=true
+      unittest-cmd: mvn test
