@@ -7,21 +7,21 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  ubuntu:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: ubuntu
       run: docker version
-  test2:
+  windows:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
     - name: windows
-      run: docker ps
-  test3:
+      run: docker version
+  mac:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: mad
+    - name: mac
       run: docker version
