@@ -34,10 +34,9 @@ jobs:
       run: echo "static-analysis"
 
   unit-test:
-    name: Unit test
     needs: static-analysis
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4.2.2
-    - name: Unit test
+    - name: Unit Test
       run: mvn test
