@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-reusable-workflow:
+  call-reusable-starter-workflow:
     uses: tmx-kenmotsu/.github/.github/workflows/reusable-starter-workflow.yml@main
     with:
       buildCommand: mvn package -DskipTests=true
