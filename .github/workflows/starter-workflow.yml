@@ -18,7 +18,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn package
+      run: mvn package -DskipTests=true
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4.6.0
       with:
@@ -41,6 +41,8 @@ jobs:
   unit-test:
     needs: static-analysis
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
     steps:
     - uses: actions/checkout@v4.2.2
     - name: JUnit
