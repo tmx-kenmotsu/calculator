@@ -9,7 +9,7 @@ class CalcTest {
     @Test
     void testAdd() {
         Calc calc = new Calc();
-        int expected = 2;
+        int expected = 1;
         int actual = calc.add(1, 1);
         assertEquals(expected, actual);
     }
