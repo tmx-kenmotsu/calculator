@@ -32,12 +32,14 @@ jobs:
       checks: write
     steps:
     - uses: actions/checkout@v4.2.2
-    - name: SpotBugs
+    - name: Static Analysis with SpotBugs
       run: mvn compile spotbugs:spotbugs
-    - uses: jwgmeligmeyling/spotbugs-github-action@v1.2
+    - name: Publish Test Report
+      uses: jwgmeligmeyling/spotbugs-github-action@v1.2
       with:
         path: '**/spotbugsXml.xml'
-    - uses: actions/upload-artifact@v4.6.0
+    - name: Upload Static Analysis Artifacts 
+      uses: actions/upload-artifact@v4.6.0
       with:
         name: Static Analysis Artifacts
         path: '**/spotbugsXml.xml'
@@ -49,12 +51,14 @@ jobs:
       checks: write
     steps:
     - uses: actions/checkout@v4.2.2
-    - name: JUnit
+    - name: Unit Test with JUnit
       run: mvn test
-    - uses: mikepenz/action-junit-report@v5.2.0
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v5.2.0
       with:
         report_paths: '**/TEST-*.xml'
-    - uses: actions/upload-artifact@v4.6.0
+    - name: Upload Unit Test Artifacts
+      uses: actions/upload-artifact@v4.6.0
       with:
         name: Unit Test Artifacts
         path: '**/TEST-*.xml'
