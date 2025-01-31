@@ -1,0 +1,16 @@
+name: Caller
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  call-reusable-workflow:
+    uses: tmx-kenmotsu/.github/.github/workflows/reusable-starter-workflow.yml@main
+    with:
+      buildCommand: mvn package -DskipTests=true
+      staticAnalysisCommand: mvn compile spotbugs:spotbugs
+      unitTestCommand: mvn test
