@@ -37,6 +37,10 @@ jobs:
     - uses: jwgmeligmeyling/spotbugs-github-action@v1.2
       with:
         path: '**/spotbugsXml.xml'
+    - uses: actions/upload-artifact@v4.6.0
+      with:
+        name: Static Analysis Artifacts
+        path: '**/spotbugsXml.xml'
 
   unit-test:
     needs: static-analysis
@@ -50,3 +54,7 @@ jobs:
     - uses: mikepenz/action-junit-report@v5.2.0
       with:
         report_paths: '**/TEST-*.xml'
+    - uses: actions/upload-artifact@v4.6.0
+      with:
+        name: Unit Test Artifacts
+        path: '**/TEST-*.xml'
