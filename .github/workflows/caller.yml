@@ -9,6 +9,8 @@ on:
 
 jobs:
   call-reusable-starter-workflow:
+    permissions:
+      checks: write
     uses: tmx-kenmotsu/.github/.github/workflows/reusable-starter-workflow.yml@main
     with:
       buildCommand: mvn package -DskipTests=true
