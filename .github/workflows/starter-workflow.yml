@@ -30,13 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4.2.2
-    - name: Static Analysis
-      run: echo "static-analysis"
+    - name: SpotBugs
+      run: mvn compile spotbugs:spotbugs
 
   unit-test:
     needs: static-analysis
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4.2.2
-    - name: Unit Test
+    - name: JUnit
       run: mvn test
