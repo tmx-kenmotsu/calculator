@@ -23,7 +23,7 @@ jobs:
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4.6.0
       with:
-        name: Build Artifacts
+        name: build-artifacts
         path: '**/*.jar'
 
   static-analysis:
@@ -33,6 +33,12 @@ jobs:
       checks: write
     steps:
     - uses: actions/checkout@v4.2.2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4.7.0
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
     - name: Static Analysis with SpotBugs
       run: mvn compile spotbugs:spotbugs
     - name: Publish Test Report
@@ -42,7 +48,7 @@ jobs:
     - name: Upload Static Analysis Artifacts 
       uses: actions/upload-artifact@v4.6.0
       with:
-        name: Static Analysis Artifacts
+        name: ut-artifacts
         path: '**/spotbugsXml.xml'
 
   unit-test:
@@ -52,6 +58,12 @@ jobs:
       checks: write
     steps:
     - uses: actions/checkout@v4.2.2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4.7.0
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
     - name: Unit Test with JUnit
       run: mvn test
     - name: Publish Test Report
@@ -61,5 +73,5 @@ jobs:
     - name: Upload Unit Test Artifacts
       uses: actions/upload-artifact@v4.6.0
       with:
-        name: Unit Test Artifacts
+        name: ut-artifacts
         path: '**/TEST-*.xml'
