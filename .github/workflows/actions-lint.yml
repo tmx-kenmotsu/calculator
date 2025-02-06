@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Lint Workflow Files
         run: |
-        docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
+          docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
