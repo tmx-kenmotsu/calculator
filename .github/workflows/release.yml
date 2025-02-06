@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      TAG: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 17
@@ -25,6 +23,6 @@ jobs:
         run: mvn package -DskipTests=true
       - name: Create Release
         run: |
-          gh release create ${{ env.TAG }} target/*.jar --generate-notes
+          gh release create ${{ github.ref_name }} target/*.jar --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
