@@ -9,18 +9,19 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ github.ref }}
+      TAG: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4.7.0
         with:
-          distribution: 'adopt'
-          java-version: 'temurin'
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
       - name: Build with Maven
         run: mvn package -DskipTests=true
       - name: Create Release
         run: |
-          gh release create ${{ env.VERSION }} target/*.jar --generate-notes
+          gh release create ${{ env.TAG }} target/*.jar --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
