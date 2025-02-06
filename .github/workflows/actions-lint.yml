@@ -1,4 +1,4 @@
-name: Lint Workflow Files
+name: Lint Workflow
 
 on:
   push:
