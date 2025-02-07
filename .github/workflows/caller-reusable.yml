@@ -1,4 +1,4 @@
-name: Caller
+name: CI (Reusable)
 
 on:
   push:
@@ -8,10 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-reusable-starter-workflow:
+  call-reusable-ci:
     permissions:
       checks: write
-    uses: tmx-kenmotsu/.github/.github/workflows/reusable-starter-workflow.yml@main
+    timeout-minutes: 60
+    uses: tmx-kenmotsu/.github/.github/workflows/reusable-ci.yml@main
     with:
       buildCommand: mvn package -DskipTests=true
       staticAnalysisCommand: mvn compile spotbugs:spotbugs
